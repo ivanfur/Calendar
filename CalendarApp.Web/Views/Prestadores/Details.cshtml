@@ -1,0 +1,122 @@
+﻿@model CalendarApp.Web.Models.Prestador
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Prestador</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ObraSocial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObraSocial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroSocio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroSocio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Plan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Plan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoSeguridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoSeguridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

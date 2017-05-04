@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CalendarManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+          <Property Name="Apellido" Type="nvarchar(max)" />
+          <Property Name="Telefono" Type="nvarchar(max)" />
+          <Property Name="Telefono2" Type="nvarchar(max)" />
+          <Property Name="Direccion" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="ObraSocial" Type="nvarchar(max)" />
+          <Property Name="NumeroSocio" Type="nvarchar(max)" />
+          <Property Name="Plan" Type="nvarchar(max)" />
+          <Property Name="CodigoSeguridad" Type="nvarchar(max)" />
+          <Property Name="Descirpcion" Type="nvarchar(max)" />
+          <Property Name="EstadoPacienteId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prestador">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+          <Property Name="Apellido" Type="nvarchar(max)" />
+          <Property Name="Telefono" Type="nvarchar(max)" />
+          <Property Name="Telefono2" Type="nvarchar(max)" />
+          <Property Name="Direccion" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="ObraSocial" Type="nvarchar(max)" />
+          <Property Name="NumeroSocio" Type="nvarchar(max)" />
+          <Property Name="Plan" Type="nvarchar(max)" />
+          <Property Name="CodigoSeguridad" Type="nvarchar(max)" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="CUIL" Type="nvarchar(max)" />
+          <Property Name="EstadoPrestadorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Turnos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="NumeroSesion" Type="nvarchar(max)" />
+          <Property Name="IdPaciente" Type="int" Nullable="false" />
+          <Property Name="IdPrestador" Type="int" Nullable="false" />
+          <Property Name="Monto" Type="real" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Prestador_EstadoPrestador">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Prestador" Type="Self.Prestador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prestador">
+              <PropertyRef Name="EstadoPrestadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnos_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+          <End Role="Turnos" Type="Self.Turnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turnos">
+              <PropertyRef Name="IdPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnos_Prestador">
+          <End Role="Prestador" Type="Self.Prestador" Multiplicity="1" />
+          <End Role="Turnos" Type="Self.Turnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestador">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turnos">
+              <PropertyRef Name="IdPrestador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CalendarManagerModelStoreContainer">
+          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prestador" EntityType="Self.Prestador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Turnos" EntityType="Self.Turnos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Prestador_EstadoPrestador" Association="Self.FK_Prestador_EstadoPrestador">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Prestador" EntitySet="Prestador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_Paciente" Association="Self.FK_Turnos_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Turnos" EntitySet="Turnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_Prestador" Association="Self.FK_Turnos_Prestador">
+            <End Role="Prestador" EntitySet="Prestador" />
+            <End Role="Turnos" EntitySet="Turnos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CalendarManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Prestadors" Relationship="Self.FK_Prestador_EstadoPrestador" FromRole="Estado" ToRole="Prestador" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ObraSocial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroSocio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Plan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoSeguridad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descirpcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EstadoPacienteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Turnos" Relationship="Self.FK_Turnos_Paciente" FromRole="Paciente" ToRole="Turnos" />
+        </EntityType>
+        <EntityType Name="Prestador">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ObraSocial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroSocio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Plan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoSeguridad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CUIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EstadoPrestadorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estado" Relationship="Self.FK_Prestador_EstadoPrestador" FromRole="Prestador" ToRole="Estado" />
+          <NavigationProperty Name="Turnos" Relationship="Self.FK_Turnos_Prestador" FromRole="Prestador" ToRole="Turnos" />
+        </EntityType>
+        <EntityType Name="Turno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NumeroSesion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdPaciente" Type="Int32" Nullable="false" />
+          <Property Name="IdPrestador" Type="Int32" Nullable="false" />
+          <Property Name="Monto" Type="Single" Nullable="false" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK_Turnos_Paciente" FromRole="Turnos" ToRole="Paciente" />
+          <NavigationProperty Name="Prestador" Relationship="Self.FK_Turnos_Prestador" FromRole="Turnos" ToRole="Prestador" />
+        </EntityType>
+        <Association Name="FK_Prestador_EstadoPrestador">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Prestador" Type="Self.Prestador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prestador">
+              <PropertyRef Name="EstadoPrestadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnos_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+          <End Role="Turnos" Type="Self.Turno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turnos">
+              <PropertyRef Name="IdPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnos_Prestador">
+          <End Role="Prestador" Type="Self.Prestador" Multiplicity="1" />
+          <End Role="Turnos" Type="Self.Turno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestador">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turnos">
+              <PropertyRef Name="IdPrestador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CalendarManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Estadoes" EntityType="Self.Estado" />
+          <EntitySet Name="Pacientes" EntityType="Self.Paciente" />
+          <EntitySet Name="Prestadors" EntityType="Self.Prestador" />
+          <EntitySet Name="Turnos" EntityType="Self.Turno" />
+          <AssociationSet Name="FK_Prestador_EstadoPrestador" Association="Self.FK_Prestador_EstadoPrestador">
+            <End Role="Estado" EntitySet="Estadoes" />
+            <End Role="Prestador" EntitySet="Prestadors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_Paciente" Association="Self.FK_Turnos_Paciente">
+            <End Role="Paciente" EntitySet="Pacientes" />
+            <End Role="Turnos" EntitySet="Turnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnos_Prestador" Association="Self.FK_Turnos_Prestador">
+            <End Role="Prestador" EntitySet="Prestadors" />
+            <End Role="Turnos" EntitySet="Turnos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CalendarManagerModelStoreContainer" CdmEntityContainer="CalendarManagerEntities">
+          <EntitySetMapping Name="Estadoes">
+            <EntityTypeMapping TypeName="CalendarManagerModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pacientes">
+            <EntityTypeMapping TypeName="CalendarManagerModel.Paciente">
+              <MappingFragment StoreEntitySet="Paciente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ObraSocial" ColumnName="ObraSocial" />
+                <ScalarProperty Name="NumeroSocio" ColumnName="NumeroSocio" />
+                <ScalarProperty Name="Plan" ColumnName="Plan" />
+                <ScalarProperty Name="CodigoSeguridad" ColumnName="CodigoSeguridad" />
+                <ScalarProperty Name="Descirpcion" ColumnName="Descirpcion" />
+                <ScalarProperty Name="EstadoPacienteId" ColumnName="EstadoPacienteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prestadors">
+            <EntityTypeMapping TypeName="CalendarManagerModel.Prestador">
+              <MappingFragment StoreEntitySet="Prestador">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ObraSocial" ColumnName="ObraSocial" />
+                <ScalarProperty Name="NumeroSocio" ColumnName="NumeroSocio" />
+                <ScalarProperty Name="Plan" ColumnName="Plan" />
+                <ScalarProperty Name="CodigoSeguridad" ColumnName="CodigoSeguridad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="CUIL" ColumnName="CUIL" />
+                <ScalarProperty Name="EstadoPrestadorId" ColumnName="EstadoPrestadorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Turnos">
+            <EntityTypeMapping TypeName="CalendarManagerModel.Turno">
+              <MappingFragment StoreEntitySet="Turnos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="NumeroSesion" ColumnName="NumeroSesion" />
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="IdPrestador" ColumnName="IdPrestador" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
